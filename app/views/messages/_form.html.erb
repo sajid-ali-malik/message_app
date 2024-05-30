@@ -1,0 +1,47 @@
+<%= form_with(model: message) do |form| %>
+  <% if message.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(message.errors.count, "error") %> prohibited this message from being saved:</h2>
+
+      <ul>
+        <% message.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :medium, style: "display: block" %>
+    <%= form.text_field :medium %>
+  </div>
+
+    <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :sent_at, style: "display: block" %>
+    <%= form.datetime_field :sent_at %>
+  </div>
+
+  <div>
+    <%= form.label :edited_at, style: "display: block" %>
+    <%= form.datetime_field :edited_at %>
+  </div>
+
+ <div class="field">
+    <%= form.label :deleted_at %>
+    <%= form.datetime_select :deleted_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sent_by_contact_id, "Sent by Contact" %>
+    <%= form.collection_select :sent_by_contact_id, Contact.all, :id, :name %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
